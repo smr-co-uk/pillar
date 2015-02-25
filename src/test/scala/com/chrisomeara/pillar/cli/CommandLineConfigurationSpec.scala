@@ -41,7 +41,7 @@ class CommandLineConfigurationSpec extends FunSpec with ShouldMatchers {
 
         describe("time-stamp 1370028262") {
           it("sets the time stamp option") {
-            CommandLineConfiguration.buildFromArguments(Array("-t", "1370028262", "initialize", "faker")).timeStampOption should equal(Some(1370028262))
+            CommandLineConfiguration.buildFromArguments(Array("-t", "1370028262", "initialize", "faker")).timeStampOption should equal(Some(1370028262000L))
           }
         }
       }

@@ -24,7 +24,9 @@ object CommandLineConfiguration {
         directory
     }
     val environmentOption = parser.option[String](List("e", "environment"), "env", "environment")
-    val timeStampOption = parser.option[Long](List("t", "time-stamp"), "time", "The migration time stamp")
+    val timeStampOption = parser.option[Long](List("t", "time-stamp"), "time", "The migration time stamp") { 
+      (timeStamp, _) =>  java.lang.Long.parseLong(timeStamp) * 1000
+    }
 
     parser.parse(arguments)
 

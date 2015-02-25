@@ -53,7 +53,7 @@ class PartialMigration {
 
     if (description.isEmpty) errors("description") = "must be present"
     if (authoredAt.isEmpty) errors("authoredAt") = "must be present"
-    if (!authoredAt.isEmpty && authoredAtAsLong < 1) errors("authoredAt") = "must be a number greater than zero"
+    if (!authoredAt.isEmpty && authoredAtAsMillis < 1) errors("authoredAt") = "must be a number greater than zero"
     if (upStages.isEmpty) errors("up") = "must be present"
 
     if (!errors.isEmpty) Some(errors.toMap) else None
@@ -66,7 +66,14 @@ class PartialMigration {
       case _:NumberFormatException => -1
     }
   }
-
+  
+  def authoredAtAsMillis: Long = {
+     try {
+      authoredAt.toLong * 1000
+     } catch {
+       case _:NumberFormatException => -1
+     }
+  }
 }
 
 class Parser {
@@ -127,11 +134,11 @@ class Parser {
         inProgress.downStages match {
           case Some(downLines) =>
             if (downLines.filterNot(line => line.isEmpty).isEmpty) {
-              Migration(inProgress.description, new Date(inProgress.authoredAtAsLong), inProgress.upStages, None)
+              Migration(inProgress.description, new Date(inProgress.authoredAtAsMillis), inProgress.upStages, None)
             } else {
-              Migration(inProgress.description, new Date(inProgress.authoredAtAsLong), inProgress.upStages, Some(downLines))
+              Migration(inProgress.description, new Date(inProgress.authoredAtAsMillis), inProgress.upStages, Some(downLines))
             }
-          case None => Migration(inProgress.description, new Date(inProgress.authoredAtAsLong), inProgress.upStages)
+          case None => Migration(inProgress.description, new Date(inProgress.authoredAtAsMillis), inProgress.upStages)
         }
     }
   }

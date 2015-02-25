@@ -25,3 +25,5 @@ overlays
 
 # git-commit-story gem
 .git-commit-story.yml
+/bin
+.cache

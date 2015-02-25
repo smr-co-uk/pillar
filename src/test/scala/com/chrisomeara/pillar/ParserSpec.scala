@@ -17,7 +17,8 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
 
       it("assigns authoredAt") {
         val resource = new FileInputStream(migrationPath)
-        Parser().parse(resource).authoredAt should equal(new Date(1370023262))
+        val expected = new Date(1370023262000L)
+        Parser().parse(resource).authoredAt should equal(expected)
       }
 
       it("assigns description") {
@@ -47,7 +48,7 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
 
       it("assigns authoredAt") {
         val resource = new FileInputStream(migrationPath)
-        Parser().parse(resource).authoredAt should equal(new Date(1370023265))
+        Parser().parse(resource).authoredAt should equal(new Date(1370023265000L))
       }
 
       it("assigns description") {
