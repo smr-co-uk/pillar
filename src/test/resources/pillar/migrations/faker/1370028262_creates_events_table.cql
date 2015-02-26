@@ -1,5 +1,6 @@
 -- description: creates events table
--- authoredAt: 1370023262
+-- comment: was 137002362, changed to 1370023000 = 1970-01-16 21:33:43.0
+-- authoredAtDate: 1970-01-16 21:33:43
 -- up:
 
 CREATE TABLE events (

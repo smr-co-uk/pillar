@@ -58,7 +58,16 @@ class PillarCommandLineAcceptanceSpec extends FeatureSpec with GivenWhenThen wit
       session.execute(QueryBuilder.select().from(keyspaceName, "views")).all().size() should equal(0)
 
       And("the applied_migrations table records the migrations")
-      session.execute(QueryBuilder.select().from(keyspaceName, "applied_migrations")).all().size() should equal(3)
+      session.execute(QueryBuilder.select().from(keyspaceName, "applied_migrations")).all().size() should equal(5)
+
+      Given("a migration that creates an events table again")
+      Given("a migration that creates a views table again")
+
+      When("the migrator migrates the schema again")
+      App().run(Array("-e", "acceptance_test", "-d", "src/test/resources/pillar/migrations", "migrate", "faker"))
+
+      Then("the keyspace contains the events table")
+      session.execute(QueryBuilder.select().from(keyspaceName, "events")).all().size() should equal(0)
     }
   }
 }

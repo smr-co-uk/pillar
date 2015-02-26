@@ -17,8 +17,9 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
 
       it("assigns authoredAt") {
         val resource = new FileInputStream(migrationPath)
-        val expected = new Date(1370023262000L)
-        Parser().parse(resource).authoredAt should equal(expected)
+        val expected = new Date(1370023000L)
+        val result = Parser().parse(resource).authoredAt
+        result should equal(expected)
       }
 
       it("assigns description") {
@@ -48,7 +49,7 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
 
       it("assigns authoredAt") {
         val resource = new FileInputStream(migrationPath)
-        Parser().parse(resource).authoredAt should equal(new Date(1370023265000L))
+        Parser().parse(resource).authoredAt should equal(new Date(1370023265L))
       }
 
       it("assigns description") {
@@ -60,7 +61,7 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
         val resource = new FileInputStream(migrationPath)
         val migration = Parser().parse(resource)
 
-        migration.up should contain( """CREATE TABLE events (
+        migration.up should contain( """CREATE TABLE events1 (
                                         |  batch_id text,
                                         |  occurred_at uuid,
                                         |  event_type text,
@@ -68,7 +69,7 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
                                         |  PRIMARY KEY (batch_id, occurred_at, event_type)
                                         |)""".stripMargin)
 
-        migration.up should contain( """CREATE TABLE events (
+        migration.up should contain( """CREATE TABLE events2 (
                                         |  batch_id text,
                                         |  occurred_at uuid,
                                         |  event_type text,
@@ -81,7 +82,7 @@ class ParserSpec extends FunSpec with BeforeAndAfter with ShouldMatchers {
         val resource = new FileInputStream(migrationPath)
         val migration = Parser().parse(resource).asInstanceOf[ReversibleMigration]
 
-        migration.down should contain( """DROP TABLE events""".stripMargin)
+        migration.down should contain( """DROP TABLE events1""".stripMargin)
         migration.down should contain( """DROP TABLE events2""".stripMargin)
       }
     }

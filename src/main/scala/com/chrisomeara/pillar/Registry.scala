@@ -72,4 +72,8 @@ class Registry(private var migrations: Seq[Migration]) {
   }
 
   def all: Seq[Migration] = migrations
+  
+  override def toString():String = {
+    "Registry: " + all
+  }
 }

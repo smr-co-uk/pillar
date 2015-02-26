@@ -17,4 +17,8 @@ class ReportingMigration(reporter: Reporter, wrapped: Migration) extends Migrati
     reporter.reversing(wrapped)
     wrapped.executeDownStatement(session)
   }
+  
+  override def toString():String = {
+    s"ReportingMigration: description=${description} authoredAt=${authoredAt} up=${up}"
+  }
 }
