@@ -15,11 +15,11 @@ object PillarBuild extends Build {
   }
 
   val dependencies = Seq(
-    "com.datastax.cassandra" % "cassandra-driver-core" % "2.0.2",
-    "com.typesafe" % "config" % "1.0.1",
+    "com.datastax.cassandra" % "cassandra-driver-core" % "2.1.2",
+    "com.typesafe" % "config" % "1.3.0",
     "org.clapper" %% "argot" % "1.0.3",
-    "org.mockito" % "mockito-core" % "1.9.5" % "test",
-    "org.scalatest" %% "scalatest" % "2.2.0" % "test"
+    "org.mockito" % "mockito-core" % "1.10.19" % "test",
+    "org.scalatest" %% "scalatest" % "2.2.3" % "test"
   )
 
   val rhPackage = TaskKey[File]("rh-package", "Packages the application for Red Hat Package Manager")
@@ -68,8 +68,8 @@ object PillarBuild extends Build {
     version := "2.0.2",
     homepage := Some(url("https://github.com/comeara/pillar")),
     licenses := Seq("MIT license" -> url("http://www.opensource.org/licenses/mit-license.php")),
-    scalaVersion := "2.11.4",
-    crossScalaVersions := Seq("2.10.4", "2.11.4"),
+//    scalaVersion := "2.11.7",
+    //crossScalaVersions := Seq("2.10.4", "2.11.7"),
     rhPackageTask
   ).settings(
     publishTo := {
