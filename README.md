@@ -116,15 +116,11 @@ Here's the short version:
 <cqlsh script without semicolon at the end>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
-
 #### Batch Syntax 
 
 The up command fails if you have more than one command separated by semicolons.
 However, the workaround is to group the commands in CQL batch command and then
 you can have as many as you like:
-
- 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 BEGIN BATCH
@@ -133,8 +129,6 @@ BEGIN BATCH
 <cqlsh script with semicolon at the end>
 APPLY BATCH
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- 
 
 #### Migration Files
 
