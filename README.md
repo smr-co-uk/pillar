@@ -41,15 +41,23 @@ The RPM installs Pillar to /opt/pillar.
 ### Packages
 
 Pillar is available at Maven Central under the GroupId com.chrisomeara and
-ArtifactId pillar\_2.10 or pillar\_2.11. The current version is 2.0.1.
+ArtifactId pillar\_2.10 or pillar\_2.11. The current version is 2.0.2.
 
 #### sbt
 
-libraryDependencies += "com.chrisomeara" % "pillar\_2.10" % "2.0.1"
+libraryDependencies += "com.chrisomeara” %% "pillar" % "2.0.2"
 
 #### Gradle
 
 compile 'com.chrisomeara:pillar\_2.10:2.0.1'
+
+### Building to a local repo for 2.10 and 2.11
+
+activator +publishLocal
+
+or
+
+sbt +publishLocal
 
 ## Usage
 
@@ -83,7 +91,7 @@ Here's the short version:
 
 4.  % pillar migrate myapp
 
-#### Migration Syntax
+#### Migration File Syntax
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- description: <description>
@@ -95,8 +103,6 @@ Here's the short version:
 -- down: 
 <cqlsh script without semicolon at the end>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- 
 
 #### Stage Syntax (1 or more stages)
 
@@ -116,7 +122,7 @@ Here's the short version:
 <cqlsh script without semicolon at the end>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#### Batch Syntax 
+#### Batch Syntax
 
 The up command fails if you have more than one command separated by semicolons.
 However, the workaround is to group the commands in CQL batch command and then
@@ -129,6 +135,8 @@ BEGIN BATCH
 <cqlsh script with semicolon at the end>
 APPLY BATCH
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Batch scripts can be used in up: or down:
 
 #### Migration Files
 
@@ -297,3 +305,14 @@ Reference the acceptance spec suite for details.
 #### 2.0.1
 
 -   Update a argot dependency to version 1.0.3 (magro)
+
+#### 2.0.2
+
+-   Merged in pending pull requests as of 2015-02-25 (bug fixes and stages)
+
+-   Added new migration file directives
+
+    -   stages, authoredAtDate (human readable date time), comment
+
+    -   updated documentation to use milliseconds for authoredAt and added
+        migration file syntax / batch file usage
